@@ -114,7 +114,6 @@ const htmlData = """
         <a href='https://google.com'><img alt='Google' src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png' /></a>
         <img alt='Alt Text of an intentionally broken image' src='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30d' />
       </p>
-      <!--
       <h3>Video support:</h3>
       <video controls>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" />
@@ -125,7 +124,6 @@ const htmlData = """
       </audio>
       <h3>IFrame support:</h3>
       <iframe src="https://google.com"></iframe>
-      -->
 """;
 
 class _MyHomePageState extends State<MyHomePage> {

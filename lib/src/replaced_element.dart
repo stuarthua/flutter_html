@@ -1,20 +1,19 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:chewie/chewie.dart';
-import 'package:chewie_audio/chewie_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_html/src/utils.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:video_player/video_player.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/html_parser.dart';
+import 'package:flutter_html/src/html_audio.dart';
 import 'package:flutter_html/src/html_elements.dart';
+import 'package:flutter_html/src/html_video.dart';
+import 'package:flutter_html/src/utils.dart';
 import 'package:flutter_html/style.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:webview_flutter/webview_flutter.dart';
 
 /// A [ReplacedElement] is a type of [StyledElement] that does not require its [children] to be rendered.
 ///
@@ -207,16 +206,24 @@ class AudioContentElement extends ReplacedElement {
   Widget toWidget(RenderContext context) {
     return Container(
       width: context.style.width ?? 300,
-      child: ChewieAudio(
-        controller: ChewieAudioController(
-          videoPlayerController: VideoPlayerController.network(
-            src.first ?? "",
-          ),
-          autoPlay: autoplay,
-          looping: loop,
-          showControls: showControls,
-          autoInitialize: true,
-        ),
+//      child: ChewieAudio(
+//        controller: ChewieAudioController(
+//          videoPlayerController: VideoPlayerController.network(
+//            src.first ?? "",
+//          ),
+//          autoPlay: autoplay,
+//          looping: loop,
+//          showControls: showControls,
+//          autoInitialize: true,
+//        ),
+//      ),
+//    ),
+      child: HtmlAudio(
+        src.first ?? "",
+        aspectRatio: 16 / 9,
+        autoplay: autoplay,
+        loop: loop,
+        controls: showControls,
       ),
     );
   }
@@ -252,19 +259,27 @@ class VideoContentElement extends ReplacedElement {
     return Container(
       width: width ?? (height ?? 150) * 2,
       height: height ?? (width ?? 300) / 2,
-      child: Chewie(
-        controller: ChewieController(
-          videoPlayerController: VideoPlayerController.network(
-            src.first ?? "",
-          ),
-          placeholder: poster != null
-              ? Image.network(poster)
-              : Container(color: Colors.black),
-          autoPlay: autoplay,
-          looping: loop,
-          showControls: showControls,
-          autoInitialize: true,
-        ),
+//      chile: Chewie(
+//        controller: ChewieController(
+//          videoPlayerController: VideoPlayerController.network(
+//            src.first ?? "",
+//          ),
+//          placeholder: poster != null
+//              ? Image.network(poster)
+//              : Container(color: Colors.black),
+//          autoPlay: autoplay,
+//          looping: loop,
+//          showControls: showControls,
+//          autoInitialize: true,
+//        ),
+//      ),
+      child: HtmlVideo(
+        src.first ?? "",
+        aspectRatio: 16 / 9,
+        poster: Image.network(poster),
+        autoplay: autoplay,
+        loop: loop,
+        controls: showControls,
       ),
     );
   }
